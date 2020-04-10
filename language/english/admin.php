@@ -18,34 +18,34 @@
  */
 //index.php
 define(
-    '_MA_YOG_FRAMEWORKSFALSE',
+    '_MA_YOGURT_FRAMEWORKSFALSE',
     "You need to install this package, in order to make this module work correctly:<br><br>
 <a href='http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1357'>Frameworks v 1.1 or newer</a><br>"
 );
-define('_MA_YOG_FRAMEWORKSTRUE', 'You have version %s of the Frameworks package');
-define('_MA_YOG_BY', 'By');
-define('_MA_YOG_DESC', 'Description');
-define('_MA_YOG_CREDITS', 'Credits');
-define('_MA_YOG_CONTRIBUTORS', 'Contributors Information');
-define('_MA_YOG_DEVELOPERS', 'Developers');
-define('_MA_YOG_TESTERS', 'Testers');
-define('_MA_YOG_TRANSLATIONS', 'Translations');
-define('_MA_YOG_EMAIL', 'Email');
-define('_MA_YOG_MODDEVDET', 'Module Development details');
-define('_MA_YOG_RELEASEDATE', 'Release date');
-define('_MA_YOG_STATUS', 'Status');
-define('_MA_YOG_OFCSUPORTSITE', 'Official Support Site');
-define('_MA_YOG_VERSIONHIST', 'Version History');
-define('_MA_YOG_CONFIGEVERYTHING', "Make sure you've configured everything under the preferences tab ");
-define('_MA_YOG_ALLTESTSOK', 'All tests must be OK for this module to work 100%:');
-define('_MA_YOG_GDEXTENSIONOK', 'GD extension loaded: OK!');
-define('_MA_YOG_MOREINFO', 'Here is more info on:');
-define('_MA_YOG_GDEXTENSIONFALSE', 'GD extension loaded: FAILED ');
-define('_MA_YOG_CONFIGPHPINI', 'Configure your php.ini or ask your server manager to install it and enable it for you.');
-define('_MA_YOG_PHP5PRESENT', 'You have a compatible version of PHP:');
-define('_MA_YOG_PHP5NOTPRESENT', 'Your PHP version is compatible, but many details would work better on a php5 server and above.');
-define('_MA_YOG_MAXBYTESPHPINI', 'Your server limits the size of uploads to %s');
-define('_MA_YOG_MEMORYLIMIT', 'The Memory Limit of your server is:');
+define('_MA_YOGURT_FRAMEWORKSTRUE', 'You have version %s of the Frameworks package');
+define('_MA_YOGURT_BY', 'By');
+define('_MA_YOGURT_DESC', 'Description');
+define('_MA_YOGURT_CREDITS', 'Credits');
+define('_MA_YOGURT_CONTRIBUTORS', 'Contributors Information');
+define('_MA_YOGURT_DEVELOPERS', 'Developers');
+define('_MA_YOGURT_TESTERS', 'Testers');
+define('_MA_YOGURT_TRANSLATIONS', 'Translations');
+define('_MA_YOGURT_EMAIL', 'Email');
+define('_MA_YOGURT_MODDEVDET', 'Module Development details');
+define('_MA_YOGURT_RELEASEDATE', 'Release date');
+define('_MA_YOGURT_STATUS', 'Status');
+define('_MA_YOGURT_OFCSUPORTSITE', 'Official Support Site');
+define('_MA_YOGURT_VERSIONHIST', 'Version History');
+define('_MA_YOGURT_CONFIGEVERYTHING', "Make sure you've configured everything under the preferences tab ");
+define('_MA_YOGURT_ALLTESTSOK', 'All tests must be OK for this module to work 100%:');
+define('_MA_YOGURT_GDEXTENSIONOK', 'GD extension loaded: OK!');
+define('_MA_YOGURT_MOREINFO', 'Here is more info on:');
+define('_MA_YOGURT_GDEXTENSIONFALSE', 'GD extension loaded: FAILED ');
+define('_MA_YOGURT_CONFIGPHPINI', 'Configure your php.ini or ask your server manager to install it and enable it for you.');
+define('_MA_YOGURT_PHP5PRESENT', 'You have a compatible version of PHP:');
+define('_MA_YOGURT_PHP5NOTPRESENT', 'Your PHP version is compatible, but many details would work better on a php5 server and above.');
+define('_MA_YOGURT_MAXBYTESPHPINI', 'Your server limits the size of uploads to %s');
+define('_MA_YOGURT_MEMORYLIMIT', 'The Memory Limit of your server is:');
 //3.4
 define('_AM_YOGURT_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
 define('_AM_YOGURT_UPGRADEFAILED1', "Update failed - couldn't add new fields");
@@ -69,8 +69,8 @@ define('AM_YOGURT_THEREARE_IMAGES', "There are <span class='bold'>%s</span> Imag
 define('AM_YOGURT_THEREARE_FRIENDS', "There are <span class='bold'>%s</span> Friends in the database");
 define('AM_YOGURT_THEREARE_VISITORS', "There are <span class='bold'>%s</span> Visitors in the database");
 define('AM_YOGURT_THEREARE_VIDEO', "There are <span class='bold'>%s</span> Video in the database");
-define('AM_YOGURT_THEREARE_INVITATIONS', "There are <span class='bold'>%s</span> Invitations in the database");
-define('AM_YOGURT_THEREARE_TRIBES', "There are <span class='bold'>%s</span> Tribes in the database");
+define('AM_YOGURT_THEREARE_FRIENDPETITION', "There are <span class='bold'>%s</span> Friendship Requests in the database");
+define('AM_YOGURT_THEREARE_GROUPS', "There are <span class='bold'>%s</span> Groups in the database");
 define('AM_YOGURT_THEREARE_MEMBERS', "There are <span class='bold'>%s</span> Members in the database");
 define('AM_YOGURT_THEREARE_NOTES', "There are <span class='bold'>%s</span> Notes in the database");
 define('AM_YOGURT_THEREARE_CONFIGS', "There are <span class='bold'>%s</span> Configs in the database");
@@ -85,12 +85,12 @@ define('AM_YOGURT_ADD_VISITORS', 'Add new Visitors');
 define('AM_YOGURT_VISITORS_LIST', 'List of Visitors');
 define('AM_YOGURT_ADD_VIDEO', 'Add new Video');
 define('AM_YOGURT_VIDEO_LIST', 'List of Video');
-define('AM_YOGURT_ADD_FRIENDPETITION', 'Add new Invitations');
-define('AM_YOGURT_FRIENDPETITION_LIST', 'List of Invitations');
-define('AM_YOGURT_ADD_TRIBES', 'Add new Tribes');
-define('AM_YOGURT_TRIBES_LIST', 'List of Tribes');
-define('AM_YOGURT_ADD_RELTRIBEUSER', 'Add new Members');
-define('AM_YOGURT_RELTRIBEUSER_LIST', 'List of Members');
+define('AM_YOGURT_ADD_FRIENDPETITION', 'Add new Friendship Request');
+define('AM_YOGURT_FRIENDPETITION_LIST', 'List of Friendship Request');
+define('AM_YOGURT_ADD_GROUPS', 'Add new Groups');
+define('AM_YOGURT_GROUPS_LIST', 'List of Groups');
+define('AM_YOGURT_ADD_RELGROUPUSER', 'Add new Members');
+define('AM_YOGURT_RELGROUPUSER_LIST', 'List of Members');
 define('AM_YOGURT_ADD_NOTES', 'Add new Notes');
 define('AM_YOGURT_NOTES_LIST', 'List of Notes');
 define('AM_YOGURT_ADD_CONFIGS', 'Add new Configs');
@@ -163,22 +163,22 @@ define('AM_YOGURT_FRIENDPETITION_DELETE', 'Delete friendpetition');
 define('AM_YOGURT_FRIENDPETITION_FRIENDPET_ID', 'ID');
 define('AM_YOGURT_FRIENDPETITION_PETITIONER_UID', 'From');
 define('AM_YOGURT_FRIENDPETITION_PETIONED_UID', 'To');
-// Tribes
-define('AM_YOGURT_TRIBES_ADD', 'Add a tribes');
-define('AM_YOGURT_TRIBES_EDIT', 'Edit tribes');
-define('AM_YOGURT_TRIBES_DELETE', 'Delete tribes');
-define('AM_YOGURT_TRIBES_TRIBE_ID', 'ID');
-define('AM_YOGURT_TRIBES_OWNER_UID', 'Owner');
-define('AM_YOGURT_TRIBES_TRIBE_TITLE', 'Tribe');
-define('AM_YOGURT_TRIBES_TRIBE_DESC', 'Description');
-define('AM_YOGURT_TRIBES_TRIBE_IMG', 'Image');
-// Reltribeuser
-define('AM_YOGURT_RELTRIBEUSER_ADD', 'Add a reltribeuser');
-define('AM_YOGURT_RELTRIBEUSER_EDIT', 'Edit reltribeuser');
-define('AM_YOGURT_RELTRIBEUSER_DELETE', 'Delete reltribeuser');
-define('AM_YOGURT_RELTRIBEUSER_REL_ID', 'ID');
-define('AM_YOGURT_RELTRIBEUSER_REL_TRIBE_ID', 'Tribe');
-define('AM_YOGURT_RELTRIBEUSER_REL_USER_UID', 'User');
+// Groups
+define('AM_YOGURT_GROUPS_ADD', 'Add a groups');
+define('AM_YOGURT_GROUPS_EDIT', 'Edit groups');
+define('AM_YOGURT_GROUPS_DELETE', 'Delete groups');
+define('AM_YOGURT_GROUPS_GROUP_ID', 'ID');
+define('AM_YOGURT_GROUPS_OWNER_UID', 'Owner');
+define('AM_YOGURT_GROUPS_GROUP_TITLE', 'Group');
+define('AM_YOGURT_GROUPS_GROUP_DESC', 'Description');
+define('AM_YOGURT_GROUPS_GROUP_IMG', 'Image');
+// Relgroupuser
+define('AM_YOGURT_RELGROUPUSER_ADD', 'Add a relgroupuser');
+define('AM_YOGURT_RELGROUPUSER_EDIT', 'Edit relgroupuser');
+define('AM_YOGURT_RELGROUPUSER_DELETE', 'Delete relgroupuser');
+define('AM_YOGURT_RELGROUPUSER_REL_ID', 'ID');
+define('AM_YOGURT_RELGROUPUSER_REL_GROUP_ID', 'Group');
+define('AM_YOGURT_RELGROUPUSER_REL_USER_UID', 'User');
 // Notes
 define('AM_YOGURT_NOTES_ADD', 'Add a notes');
 define('AM_YOGURT_NOTES_EDIT', 'Edit notes');
@@ -198,7 +198,7 @@ define('AM_YOGURT_CONFIGS_CONFIG_UID', 'User');
 define('AM_YOGURT_CONFIGS_PICTURES', 'Pictures');
 define('AM_YOGURT_CONFIGS_AUDIO', 'Audio');
 define('AM_YOGURT_CONFIGS_VIDEOS', 'Videos');
-define('AM_YOGURT_CONFIGS_TRIBES', 'Tribes');
+define('AM_YOGURT_CONFIGS_GROUPS', 'Groups');
 define('AM_YOGURT_CONFIGS_NOTES', 'Notes');
 define('AM_YOGURT_CONFIGS_FRIENDS', 'Friends');
 define('AM_YOGURT_CONFIGS_PROFILE_CONTACT', 'Contact');

@@ -35,7 +35,7 @@ if (is_object($helper->getModule())) {
 }
 
 $adminmenu[] = [
-    'title' => _MI_YOG_ADMENU1,
+    'title' => _MI_YOGURT_ADMENU1,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/home.png',
 ];
@@ -54,31 +54,31 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU4,
-    'link'  => 'admin/visitors.php',
-    'icon'  => "{$pathIcon32}/user-icon.png",
-];
-
-$adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU5,
-    'link'  => 'admin/video.php',
-    'icon'  => "{$pathIcon32}/marquee.png",
-];
-
-$adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU6,
     'link'  => 'admin/friendpetition.php',
     'icon'  => "{$pathIcon32}/face-smile.png",
 ];
 
 $adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU5,
+    'link'  => 'admin/visitors.php',
+    'icon'  => "{$pathIcon32}/user-icon.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU6,
+    'link'  => 'admin/video.php',
+    'icon'  => "{$pathIcon32}/marquee.png",
+];
+
+$adminmenu[] = [
     'title' => MI_YOGURT_ADMENU7,
-    'link'  => 'admin/tribes.php',
+    'link'  => 'admin/groups.php',
     'icon'  => "{$pathIcon32}/groupmod.png",
 ];
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU8,
-    'link'  => 'admin/reltribeuser.php',
+    'link'  => 'admin/relgroupuser.php',
     'icon'  => "{$pathIcon32}/penguin.png",
 ];
 
@@ -107,7 +107,7 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
-    'title' => _MI_YOG_MENU_02,
+    'title' => _MI_YOGURT_MENU_02,
     'link'  => 'admin/main.php',
     'icon'  => $pathIcon32 . '/manage.png',
 ];
@@ -119,7 +119,7 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/block.png',
 ];
 
-if ($helper->getConfig('displayDeveloperTools')) {
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
     $adminmenu[] = [
         'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
         'link'  => 'admin/migrate.php',
@@ -128,13 +128,13 @@ if ($helper->getConfig('displayDeveloperTools')) {
 }
 
 //$adminmenu[] = [
-//    'title' => _MI_YOG_ADMENU2,
+//    'title' => _MI_YOGURT_ADMENU2,
 //    'link'  => 'admin/main.php?op=about',
 //    'icon'  => $pathIcon32 . '/about.png',
 //];
 
 $adminmenu[] = [
-    'title' => _MI_YOG_ADMENU2,
+    'title' => _MI_YOGURT_ADMENU2,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png',
 ];

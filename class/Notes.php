@@ -27,7 +27,10 @@ class Notes extends \XoopsObject
      */
     public function __construct($id = null)
     {
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        /** @var  Helper $helper */
+        $this->helper     = Helper::getInstance();
+        $this->permHelper = new \Xmf\Module\Helper\Permission();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('note_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('note_text', XOBJ_DTYPE_TXTAREA, null, false);
         $this->initVar('note_from', XOBJ_DTYPE_INT, null, false, 10);

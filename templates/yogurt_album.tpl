@@ -2,9 +2,9 @@
 
 <{if ($showForm==1) }>
 <div id="yogurt-album-form" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{$lang_formtitle}>
-    </h2>
+    </h4>
     <form name="form_picture" id="form_picture" action="submit.php" method="post" enctype="multipart/form-data">
         <p class="odd"><{$token}><label class="yogurt-album-label-alert"><{$lang_youcanupload}></label></p>
         <p class="even"><label class="yogurt-album-label-alert"><{$lang_nb_pict}> <{$lang_max_nb_pict}></label></p>
@@ -15,15 +15,15 @@
         <p class="foot"><input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_uploadpicture}>'></p>
     </form>
 </div>
-<{ /if}>
+<{/if}>
 <div id="yogurt-album-container" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{if $isOwner}>
             <{$lang_mysection}>
         <{else}>
-            <{$owner_uname}><{$section_name}>
+            <{$owner_uname}> <{$section_name}>
         <{/if}>
-    </h2>
+    </h4>
     <{if $lang_nopicyet=="" }>
     <{section name=i loop=$pics_array}>
     <{if (($pics_array[i].private == 0) || ($isOwner==1)) }>
@@ -32,12 +32,12 @@
     <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
         <{$token}>
-        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="assets/images/dele.gif">
+        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
     </form>
-    <form action="editdesc.php" method="post" id="editform" class="yogurt-album-formquick">
+    <form action="editdescpicture.php" method="post" id="editform" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
         <{$token}>
-        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="assets/images/edit.gif">
+        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
     </form>
     <form action="avatar.php" method="post" id="setavatar" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
@@ -58,19 +58,19 @@
     <{if ($pics_array[i].private == 1) }>
         <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
-    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-            <img class="thumb" src="<{$xoops_url}>/uploads/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
+            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
         </a></p>
     <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
 </div>
     <{/if}>
     <{/section}>
 <{else}>
-    <h2 id="yogurt-album-nopic"><{$lang_nopicyet}></h2>
+    <h4 id="yogurt-album-nopic"><{$lang_nopicyet}></h4>
 <{/if}>
 </div>
 <{if $navegacao!='' }>
 <div id="yogurt-navegacao"><{$navegacao}></div>
-<{ /if}>
+<{/if}>
 <div style="clear:both;width:100%"></div>
 <{include file="db:yogurt_footer.tpl"}>

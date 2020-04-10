@@ -57,12 +57,12 @@ $totalVideo = $videoHandler->getCount();
 //count "total Friendpetition"
 /** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
 $totalFriendpetition = $friendpetitionHandler->getCount();
-//count "total Tribes"
-/** @var \XoopsPersistableObjectHandler $tribesHandler */
-$totalTribes = $tribesHandler->getCount();
-//count "total Reltribeuser"
-/** @var \XoopsPersistableObjectHandler $reltribeuserHandler */
-$totalReltribeuser = $reltribeuserHandler->getCount();
+//count "total Groups"
+/** @var \XoopsPersistableObjectHandler $groupsHandler */
+$totalGroups = $groupsHandler->getCount();
+//count "total Relgroupuser"
+/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
+$totalRelgroupuser = $relgroupuserHandler->getCount();
 //count "total Notes"
 /** @var \XoopsPersistableObjectHandler $notesHandler */
 $totalNotes = $notesHandler->getCount();
@@ -84,20 +84,20 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
 // InfoBox friendship
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
 
+// InfoBox friendpetition
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition));
+
 // InfoBox visitors
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors));
 
 // InfoBox video
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
 
-// InfoBox friendpetition
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_INVITATIONS, $totalFriendpetition));
+// InfoBox groups
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));
 
-// InfoBox tribes
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_TRIBES, $totalTribes));
-
-// InfoBox reltribeuser
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalReltribeuser));
+// InfoBox relgroupuser
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalRelgroupuser));
 
 // InfoBox notes
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_NOTES, $totalNotes));
@@ -170,6 +170,7 @@ function hideButtons($yamlFile)
  */
 function showButtons($yamlFile)
 {
+    $app                        = [];
     $app['displaySampleButton'] = 1;
     \Xmf\Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');

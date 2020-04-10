@@ -1,9 +1,7 @@
-<{if $isanonym!=1 }>
-    <{include file="db:yogurt_navbar.tpl"}>
-<{/if}>
+<{include file="db:yogurt_navbar.tpl"}>
 
 <{$searchform.javascript}>
-<h2><{$searchform.title}></h2>
+<h4><{$searchform.title}></h4>
 <form name="<{$searchform.name}>" action="<{$searchform.action}>" method="<{$searchform.method}>" <{$searchform.extra}>>
     <div>
         <!-- start of form elements loop -->

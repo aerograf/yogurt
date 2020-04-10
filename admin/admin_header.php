@@ -16,14 +16,19 @@
  * @since
  * @author       XOOPS Development Team
  */
-include dirname(__DIR__) . '/preloads/autoloader.php';
+
+use XoopsModules\Yogurt;
 
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
 require dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
+/** @var \XoopsModules\Yogurt\Helper $helper */
 $helper = \XoopsModules\Yogurt\Helper::getInstance();
 
 /** @var \Xmf\Module\Admin $adminObject */
@@ -50,10 +55,10 @@ $visitorsHandler = $helper->getHandler('Visitors');
 $videoHandler = $helper->getHandler('Video');
 /** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
 $friendpetitionHandler = $helper->getHandler('Friendpetition');
-/** @var \XoopsPersistableObjectHandler $tribesHandler */
-$tribesHandler = $helper->getHandler('Tribes');
-/** @var \XoopsPersistableObjectHandler $reltribeuserHandler */
-$reltribeuserHandler = $helper->getHandler('Reltribeuser');
+/** @var \XoopsPersistableObjectHandler $groupsHandler */
+$groupsHandler = $helper->getHandler('Groups');
+/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
+$relgroupuserHandler = $helper->getHandler('Relgroupuser');
 /** @var \XoopsPersistableObjectHandler $notesHandler */
 $notesHandler = $helper->getHandler('Notes');
 /** @var \XoopsPersistableObjectHandler $configsHandler */

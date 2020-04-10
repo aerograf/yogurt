@@ -45,18 +45,20 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * create a new Tribes
+     * create a new Groups
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Tribes
+     * @return \XoopsObject Groups
      */
     public function create($isNew = true)
     {
         {
             $obj = parent::create($isNew);
-            //        if ($isNew) {
-            //            $obj->setDefaultPermissions();
-            //        }
+            if ($isNew) {
+                $obj->setNew();
+            } else {
+                $obj->unsetNew();
+            }
             $obj->helper = $this->helper;
 
             return $obj;
@@ -259,7 +261,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     {
         $myts = new \MyTextSanitizer();
         $ret  = [];
-        $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text FROM ' . $this->db->prefix('yogurt_notes') . ', ' . $this->db->prefix('users');
+        $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date FROM ' . $this->db->prefix('yogurt_notes') . ', ' . $this->db->prefix('users');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
@@ -281,6 +283,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
                 $temptext                 = $myts->xoopsCodeDecode($myrow['note_text'], 1);
                 $vetor[$i]['text']        = $myts->nl2Br($temptext);
                 $vetor[$i]['id']          = $myrow['note_id'];
+                $vetor[$i]['date']        = $myrow['date'];
 
                 $i++;
             }

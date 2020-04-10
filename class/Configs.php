@@ -26,13 +26,16 @@ class Configs extends \XoopsObject
      */
     public function __construct($id = null)
     {
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        /** @var  Helper $helper */
+        $this->helper     = Helper::getInstance();
+        $this->permHelper = new \Xmf\Module\Helper\Permission();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('config_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('config_uid', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('pictures', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('audio', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('videos', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('tribes', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('groups', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('notes', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friends', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('profile_contact', XOBJ_DTYPE_INT, null, false, 10);

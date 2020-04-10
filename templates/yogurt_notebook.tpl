@@ -20,30 +20,30 @@
         [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></i> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
     </div>
 </div>
-<{ /if}>
+<{/if}>
 
 <div id="yogurt-Notes-container" class="outer">
-    <h2 class="head"><{$section_name}></h2>
+    <h4 class="head"><{$section_name}></h4>
     <{if $lang_noNotesyet=="" }>
         <{section name=i loop=$notes}>
             <div class="yogurt-Note-details <{cycle values="odd,even"}>">
                 <div class="yogurt-Note-avatarandname">
                     <p class="yogurt-Note-uname">&nbsp;<a href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a>
                     </p>
-                    <{if $notes[i].user_avatar=="blank.gif" }><img src="assets/images/noavatar.gif"><{else}><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
+                    <{if $notes[i].user_avatar=="avatars/blank.gif" }><img src="assets/images/noavatar.gif"><{else}><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
                     <{if $isOwner==1}>
                     <p>
                     <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="assets/images/dele.gif">
+                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
                         <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
                     </form>
 
                     </p>
-                    <{ /if}>
+                    <{/if}>
                 </div>
                 <div class="yogurt-Note-details-texts">
                     <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
-                        &nbsp;<{$notes[i].text}>
+                        &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date}></small>
                         <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>
                     </p>
                     <{if $isOwner==1}>
@@ -66,12 +66,12 @@
           <div><a  class="yogurt-Notes-replyNote">
             <{$lang_answerNote}>
           </a></div>
-        <{ /if}>
+        <{/if}>
         -->
             </div>
         <{/section}>
     <{else}>
-        <h2><{$lang_noNotesyet}></h2>
+        <h4><{$lang_noNotesyet}></h4>
     <{/if}>
 
 

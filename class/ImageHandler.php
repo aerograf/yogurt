@@ -69,10 +69,10 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * create a new Tribes
+     * create a new Groups
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Tribes
+     * @return \XoopsObject Groups
      */
     public function create($isNew = true)
     {
@@ -81,6 +81,11 @@ class ImageHandler extends \XoopsPersistableObjectHandler
             //        if ($isNew) {
             //            $obj->setDefaultPermissions();
             //        }
+            if ($isNew) {
+                $obj->setNew();
+            } else {
+                $obj->unsetNew();
+            }
             $obj->helper = $this->helper;
 
             return $obj;
@@ -316,7 +321,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
      */
     public function renderFormEdit($caption, $cod_img, $filename)
     {
-        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdesc.php', 'post', true);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdescpicture.php', 'post', true);
         $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
         $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
@@ -357,9 +362,10 @@ class ImageHandler extends \XoopsPersistableObjectHandler
         //$hash = substr($hash1,0,4);
 
         // mimetypes and settings put this in admin part later
-        $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
+        $allowed_mimetypes = Helper::getInstance()->getConfig('mimetypes');
         $maxfilesize       = $maxfilebytes;
 
+        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
         // create the object to upload
         $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
         // fetch the media
