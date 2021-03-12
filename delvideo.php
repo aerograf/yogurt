@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -10,45 +12,53 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         suico
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use Xmf\Request;
+use XoopsModules\Suico\{
+    VideoHandler
+};
 
 require __DIR__ . '/header.php';
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
-$cod_video = $_POST['cod_video'];
-
-if (1 != $_POST['confirm']) {
-    xoops_confirm(['cod_video' => $cod_video, 'confirm' => 1], 'delvideo.php', _MD_YOGURT_ASKCONFIRMVIDEODELETION, _MD_YOGURT_CONFIRMVIDEODELETION);
+$cod_video = Request::getInt('cod_video', 0, 'POST');
+if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, 'POST')) {
+    xoops_confirm(
+        [
+            'cod_video' => $cod_video,
+            'confirm'   => 1,
+        ],
+        'delvideo.php',
+        _MD_SUICO_ASKCONFIRMVIDEODELETION,
+        _MD_SUICO_CONFIRMVIDEODELETION
+    );
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $videoFactory = new Yogurt\VideoHandler($xoopsDB);
-    $criteria_img = new \Criteria('video_id', $cod_video);
+    $videoFactory = new VideoHandler(
+        $xoopsDB
+    );
+    $criteria_img = new Criteria('video_id', $cod_video);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new \Criteria('uid_owner', $uid);
-    $criteria     = new \CriteriaCompo($criteria_img);
-    $criteria->add($criteria_uid);
-
+    $criteriaUid  = new Criteria('uid_owner', $uid);
+    $criteria     = new CriteriaCompo($criteria_img);
+    $criteria->add($criteriaUid);
     /**
      * Try to delete
      */
     if ($videoFactory->deleteAll($criteria)) {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_VIDEODELETED);
+        redirect_header('videos.php?uid=' . $uid, 2, _MD_SUICO_VIDEO_DELETED);
     } else {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('videos.php?uid=' . $uid, 2, _MD_SUICO_ERROR);
     }
 }
-
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

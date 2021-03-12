@@ -1,28 +1,31 @@
 <?php
+
+declare(strict_types=1);
 /*
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * @category        Module
+ * @package         suico
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-/**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
- */
+use Xmf\Module\Admin;
+
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 require_once dirname(__DIR__) . '/include/common.php';
-
 return (object)[
-    'name'           => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
-    'paths'          => [
+    'name'            => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
+    'paths'           => [
         'dirname'    => $moduleDirName,
         'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
         'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
@@ -30,27 +33,26 @@ return (object)[
         'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'uploadFolders'  => [
+    'uploadFolders'   => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/audio',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/groups',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-    'copyBlankFiles' => [
+    'copyBlankFiles'  => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/audio',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/groups',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-
     'copyTestFolders' => [
         [
             XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads',
@@ -61,7 +63,6 @@ return (object)[
         //                XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         //            ],
     ],
-
     'templateFolders' => [
         '/templates/',
         //            '/templates/blocks/',
@@ -83,17 +84,31 @@ return (object)[
         '/tcpdf',
     ],
     'renameTables'    => [
-        'yogurt_seutubo' => 'yogurt_video',
-        'yogurt_Groups'  => 'yogurt_groups',
-        'yogurt_Configs' => 'yogurt_configs',
+        'suico_seutubo'        => 'suico_videos',
+        'suico_Groups'         => 'suico_groups',
+        'suico_Configs'        => 'suico_configs',
+        'suico_friendpetition' => 'suico_friendrequests',
+        'suico_audio'          => 'suico_audios',
+        'suico_friendship'     => 'suico_friendships',
     ],
     'renameColumns'   => [
-        '3.4' => [
-            'yogurt_notes' => [
+        '3.5' => [
+            'suico_notes'          => [
                 'Note_id'   => 'note_id',
-                'Note_text' => 'yogurt_configs',
-                'Note_from' => 'note_text',
-                'Note_to'   => 'note_from',
+                'Note_text' => 'note_text',
+                'Note_from' => 'note_from',
+                'Note_to'   => 'note_to',
+            ],
+            'suico_friendrequests' => [
+                'requespet_uid' => 'friendreq_id',
+                'requester_uid' => 'friendrequester_uid',
+                'requestto_uid' => 'friendrequestto_uid',
+            ],
+            'suico_audios'         => [
+                'url' => 'filename',
+            ],
+            'suico_images'         => [
+                'url' => 'filename',
             ],
         ],
     ],
@@ -103,5 +118,5 @@ return (object)[
         //            'totalsubmitted'  => $helper->getHandler('Item')->getItemsCount(-1, [Constants::PUBLISHER_STATUS_SUBMITTED]),
     ],
     'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . "' alt='XOOPS Project'></a>",
+                     <img src='" . Admin::iconUrl('xoopsmicrobutton.gif') . "' alt='XOOPS Project'></a>",
 ];

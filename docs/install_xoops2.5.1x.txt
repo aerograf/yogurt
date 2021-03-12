@@ -1,0 +1,28 @@
+Install:
+============================
+1. Upload the Suico module directory to ROOT_URL/modules/
+
+2. Log in to your site as administrator.
+
+3. Install the module using the module administration panel at 'System Admin -> Modules'.
+
+Optional Procedure
+-------------------
+Hack to make the suico userpage as the main userpage of your site If you are using the profile module
+
+Open ROOT_URL/modules/profile/userinfo.php, search at the very beggining of the file  for
+
+$uid = isset($_GET['uid']) ? (int)$_GET['uid'] : 0;
+if ($uid <= 0) {
+    if (is_object($GLOBALS['xoopsUser'])) {
+        $uid = $GLOBALS['xoopsUser']->getVar('uid');
+    } else {
+        header('location: ' . XOOPS_URL);
+        exit();
+    }
+}
+
+Add after this the following lines:
+
+header("Location:".XOOPS_URL."/modules/suico/index.php?uid=".$uid);
+exit();

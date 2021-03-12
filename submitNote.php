@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -10,54 +12,55 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         suico
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use Xmf\Request;
+use XoopsModules\Suico\{
+    NotesHandler
+};
 
 require __DIR__ . '/header.php';
-
 /**
  * Modules class includes
  */
 //require_once __DIR__ . '/class/Notes.php';
-
 /**
  * Factories of groups
  */
-$notesFactory = new Yogurt\NotesHandler($xoopsDB);
-
+$notesFactory = new NotesHandler($xoopsDB);
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
-$myts         = MyTextSanitizer::getInstance();
-$Notebook_uid = $_POST['uid'];
-$note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
-$mainform     = (!empty($_POST['mainform'])) ? 1 : 0;
-$Note         = $notesFactory->create();
-$Note->setVar('note_text', $note_text);
-$Note->setVar('note_from', $xoopsUser->getVar('uid'));
-$Note->setVar('note_to', $Notebook_uid);
-$notesFactory->insert($Note);
-$extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($Notebook_uid);
-$extra_tags['X_OWNER_UID']  = $Notebook_uid;
-$notificationHandler        = xoops_getHandler('notification');
+$myts         = \MyTextSanitizer::getInstance();
+$notebook_uid = Request::getInt('uid', 0, 'POST');
+$noteText     = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
+$mainform     = !empty($_POST['mainform']) ? 1 : 0;
+$noteObj      = $notesFactory->create();
+$noteObj->setVar('note_text', $noteText);
+$noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
+$noteObj->setVar('note_to', $notebook_uid);
+$noteObj->setVar('date_created', time());
+$notesFactory->insert2($noteObj);
+$noteId                     = $xoopsDB->getInsertId();
+$extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($notebook_uid);
+$extra_tags['X_OWNER_UID']  = $notebook_uid;
+/** @var \XoopsNotificationHandler $notificationHandler */
+$notificationHandler = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
-    redirect_header('notebook.php?uid=' . $Notebook_uid, 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $notebook_uid . '#' . $noteId, 1, _MD_SUICO_NOTE_SENT);
 } else {
-    redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_SUICO_NOTE_SENT);
 }
-
 /**
  * Close page
  */
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

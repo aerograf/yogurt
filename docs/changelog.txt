@@ -1,17 +1,133 @@
+<h5>3.5 Final    [2020-11-16]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.12, PHP 8.0 RC 4
+<hr>
+- PHP7, PHP8 adjustments (mamba)
+
+
+<h5>3.5 Beta 2    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
+<hr>
+- Add youtube code help (liomj)
+- Add option to use full youtube url in code input (liomj)
+
+<h5>3.5 Beta 1    [2020-05-07]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
+<hr>
+- renamed to SUICO (mamba)
+- Add total comments for Group (liomj)
+- Replace Ligtbox with Magnific Popup Lightbox (liomj)
+- Add Dates and Title in Video Templates (liomj/mamba)
+- Fix Sub-Menu visible to Guest (liomj)
+- Add Profile Module 1.90 features (liomj)
+- Make suico the main userpage on install (liomj)
+- Add Caption in Album (liomj)
+- Add Dates in Album and Audio Templates (liomj/mamba)
+- Add date created & group total members (liomj/mamba)
+- Fix Group Pagination (liomj)
+- New Private Message alert in Navbar (liomj)
+- Add Cancel Friend Request Option (liomj)
+- Fix Friendship Status and Approval (liomj)
+- Update templates (liomj)
+- Datetime updates (mamba)
+- fix Recent Visitors (mamba)
+- fix proportional resizing of Pictures in Block (mamba, liomj)
+- fix name missing in friend request (liomj)
+- fix wrong count of groups (liomj)
+- fix online status always "offline" (liomj)
+- fix website button in memberlist (liamj)
+- fix guest access (mamba)
+- fix settings (mamba)
+- fix registered members can see private info (mamba)
+- refactor forms into classes (mamba)
+- update editpicture (liomj)
+- update footer (liomj)
+- fix GUI with tons of templates improvements (liomj)
+- add totals for groups and comments (liomj)
+- use datables in groups (liomj)
+- remove old jQuery (liomj)
+- conversions to Xmf\Request (mamba)
+- added extra users for testing (mamba)
+- add new avatars (mamba)
+- add titles on images for testing (mamba)
+- fix visitors listed more than once (liomj/mamba)
+- fix queries for user photos in blocks (liomj/mamba)
+- update font awesome (liomj)
+
+
+<h5>3.5 Alpha 5    [2020-04-21]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+
+- Templates Conversion to bootstrap 4 (liomj)
+- Fix Guest can't access group page (liomj)
+- Fix edit,delete,avatar,private button visible to guest (liomj)
+- Fix Group Redirection (liomj)
+- Option to disable user suspension (liomj)
+- redirect guest to guest page (liomj/young)
+- move variables to footer.php (liomj)
+- add members online status (liomj)
+- add new members list page (liomj)
+- add friendship status (liomj)
+- separate photos and friends block (liomj)
+- add pending status after friend request (liomj)
+- remove icq,aim,yim,msnm (liomj)
+- add preferences group order (liomj)
+- fix missing closing div in group page template (liomj)
+- add group owner name in group page (liomj)
+- changed photo description to be a required field (liomj)
+- Fix required caption marker for groups (liomj)
+- More Templates update and fix (liomj)
+- Languages changes (liomj)
+- Added option to disable pm button in my friend block (liomj)
+- Fix my friend block errors (liomj)
+- Added the ability to disable the friendship evaluation ranking (liomj)
+- Fix featured video template in profile page (liomj)
+- Rename editdesc.php to editdescpciture.php (liomj)
+- Change join and leave groups image to button (liomj)
+* RGB color function instead of #HEX representation (mamba)
+* PhpDoc updates  (mamba)
+* Unnecessary double quotes (mamba)
+* Yoda (mamba)
+* fix delete video not possible (mamba)
+* convert to Xmf\Request (mamba)
+- convert to SCRIPT_NAME (mamba)
+* fix "image edit, delete, set to private is not working" (mamba)
+* fix "import sample data is not working" (mamba)
+* fix for "error when uploading group image" (mamba)
+* fix "uploading mp3 in audios not working" (mamba)
+* PSR-12 elseif (mamba)
+* fix for "image set as avatar is not working" (mamba)
+* fix for error when creating a group (mamba)
+- remove defined('XOOPS_ROOT_PATH') (mamba)
+* fix view images in Admin (mamba)
+* add Privacy table (mamba)
+* temporary solution for insert() and get() conflicts (mamba)
+* updated Migrate file to 3.5 version (mamba)
+* update menu and language (mamba)
+* Case mismatch in method call or class usage (mamba)
+* Traditional syntax array literal detected (mamba)
+* Redundant @var tag (mamba)
+* fix for Undefined constant, class, method (mamba)
+* Missing associated label (mamba)
+* fix move Private below the picture, so pictures are aligned on top (mamba)
+* change date fields to INT(11) (mamba)
+* fix Notes in Admin, add text truncate (mamba)
+* fix Config (mamba)
+* change petition to request (mamba)
+* fix delete group (mamba)
+* fix submit note (mamba)
+
+
 <h5>3.5 Alpha 4   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
-- add friend petition in friend section & change add as a friend image (liomj)
-- correction for pettition in yogurt_friends.tpl (liomj)
+- add friend friendrequest in friend section & change add as a friend image (liomj)
+- correction for pettition in suico_friends.tpl (liomj)
 - language - profile & video template updates (liomj)
-- /photos renamed to /images
-- CSS from h2 to h4
-- fix group view from search
-- updated images
-- renaming tribes to groups
-- required Group name & description
-- fix for Group search - it shows now individual groups
-- changed group icon
-- language changes
+- /photos renamed to /images (mamba)
+- CSS from h2 to h4 (mamba)
+- fix group view from search (mamba)
+- updated images (mamba)
+- renaming tribes to groups (mamba)
+- required Group name & description (mamba)
+- fix for Group search - it shows now individual groups (mamba)
+- changed group icon (mamba)
+- language changes (mamba)
 
 
 <h5>3.5 Alpha 3   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
@@ -23,27 +139,27 @@
 - fix for blank avatar is missing in friendship request and friends block (liomj/mamba)
 - fix wrong function name (mamba)
 - fix for video main, and private images (liomj/mamba)
-- minor update to yogurt_index.tpl (liomj)
+- minor update to suico_index.tpl (liomj)
 - video fix (liomj/mamba)
-- fix friends avatar in yogurt_friends.tpl (liomj)
+- fix friends avatar in suico_friends.tpl (liomj)
 
 
 
 <h5>3.5 Alpha 2   [2020-04-04]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - Missing Post date in notes (liomj)
-- Update yogurt_navbar.tpl (liomj)
+- Update suico_navbar.tpl (liomj)
 - Fix missing lightbox icons (liomj)
 - hide empty field in profile, text spacing in album template (liomj)
-- Update yogurt_index.tpl (liomj)
-- Update yogurt_searchresults.tpl (liomj)
+- Update suico_index.tpl (liomj)
+- Update suico_searchresults.tpl (liomj)
 - Update main.php (liomj)
 - fix blank.gif avatar (liomj)
 - Hide empty website field and private email address in profile (liomj)
 - fix uploading/resizing group logos (mamba)
 - added new test data (mamba)
 - partial fixes for image folders (mamba)
-- renamed language variables from _YOG_ to _YOGURT_ for consistency (mamba)
+- renamed language variables from _YOG_ to _SUICO_ for consistency (mamba)
 - fix install error (mjoel/mamba)
 
 
@@ -56,7 +172,7 @@
 - template cleanup (mamba)
 - fix redirection after friendship request (mjoel/mamba)
 - fix config saving (mjoel/mamba)
-- fix missing $this is YogurtController (mamba)
+- fix missing $this is SuicoController (mamba)
 - type compatibility (mamba)
 - added BlocksAdmin (mamba)
 - added Migrate (mamba)
@@ -76,7 +192,7 @@
 - DB renamed table/fields (mamba)
 - moved js, css, and images to /assets (mjoel/mamba)
 - fix redirect to wrong URL after posting in notes (mjoel/mamba)
-- fix for YogurtController, other fixes (mamba)
+- fix for SuicoController, other fixes (mamba)
 - cosmetics (mamba)
 - spelling (mamba)
 - wrong file names (mamba)
@@ -137,20 +253,20 @@
 Bugs fixed
 
 fixed #2074440 file upload size on the search page (m0nty_)
-fixed #2074263 check for /uploads/yogurt/mp3 in the backend (dhcst)
+fixed #2074263 check for /uploads/suico/audio in the backend (dhcst)
 fixed #2074362 MP3 player read now ID3v1 and v2 (dhcst)
 fixed #1993627 deleting Photos with errors (dhcst)
 fixed #1939798 Smarty error: mailto: missing (dhcst)
 fixed height Notebook> bbcode tips (sato-san)
 fixed bug triebes in navbar (dhcst)
-fixed Permission audio.php (dhcst)
+fixed Permission audios.php (dhcst)
 fixed Permission mainfile.php (dhcst)
 fixed sanitize $_GET['uid'] (dhcst)
 fixed some sanitizing (m0nty_)
 fixed configuration> cosmetic (sato-san)
 added tables for impresscms (m0nty_)
-added folder uploads/yogurt/mp3 (sato-san)
-added yogurt works now without Frameworks (dhcst)
+added folder uploads/suico/audio (sato-san)
+added suico works now without Frameworks (dhcst)
 added code for simple-xoops updater
 deleted URL is not available (sato-san)
 
@@ -160,7 +276,7 @@ deleted URL is not available (sato-san)
 New features:
 
 Fans page
-Notifications upon new friend petition
+Notifications upon new friend friendrequest
 
 
 ## 07/04/2008
@@ -171,7 +287,7 @@ Bugs fixed:
 1904670 Textual error: "see your emails" dbrazil
 1933885 No avatar for userid above 100
 1902089 filename for thumbnail is too long frogx
-1888645 yogurt.css
+1888645 suico.css
 1888643 cr in Notes
 1888640 display error with right column
 1888639 too much friends, no second page
@@ -189,7 +305,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 
 1844542     groups insert [saba]
 1844582     Some definitions not in lang files [irmtfan]
-1849511     If I use yogurt as profile page I can't upload avatar
+1849511     If I use suico as profile page I can't upload avatar
 1844586     place holder for main video and avatar [irtmfan]
 1844541     true videos problem [saba]
 1844538     blank video area after insert [pewy]
@@ -211,7 +327,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1852981     New Feature-User Album
 1851942     missing semicolon in french file
 1844587     repeated definitions [irtmfan]
-1844552     no search on yogurt [takeaweb]
+1844552     no search on suico [takeaweb]
 1844590     album page missing requirements [patrick80]
 1854041     Typo
 1875338     notification.inc Note $item['url']
@@ -231,7 +347,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844558     star smile, heart problem with ie [takeaweb]
 1844556     view all not defined [takeaweb]
 1844555     you can upload only... not defined [takeaweb]
-1844554     _MI_YOGURT_FRIENDS_DESC not defined [takeaweb]
+1844554     _MI_SUICO_FRIENDS_DESC not defined [takeaweb]
 1844553     Note error on ie on delete [takeaweb]
 1844549     xoops.js $ click smilies doesn t work [maxxy]
 1844546     album: newest first [maxxy]
@@ -243,7 +359,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844535     user listed in visitors of the profile [maxxy]
 1851078     French translation
 1844520     ENGINE=MyISAM I can't install it. [sinoer]
-1844518     in yogurt_visitors the column datetime no present [takeaweb]
+1844518     in suico_visitors the column datetime no present [takeaweb]
 1802818     Imagem modelo de tribo dando pau
 1783746     link to album won t show for anonyms
 
@@ -252,7 +368,7 @@ and help this project reporting your bugs too
 
 ## 26/11/2007
 First Beta Release Version 2.9
-Changed the project to yogurt social network
+Changed the project to suico social network
 Picures, Videos, Notes, Groups, Configs, Friends
 
 ## 26/08/2007

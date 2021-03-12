@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -10,44 +12,43 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         suico
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use Xmf\Request;
+use XoopsModules\Suico\{
+    FriendrequestHandler,
+    FriendshipHandler
+};
 
 require __DIR__ . '/header.php';
 /**
- * Factory of petitions created
+ * Factory of friendrequests created
  */
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
-
+$friendrequestFactory = new FriendrequestHandler($xoopsDB);
+$friendshipFactory    = new FriendshipHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$friend1_uid = \Xmf\Request::getInt('friend_uid', 0, 'POST');
-$friend2_uid = (int)$xoopsUser->getVar('uid');
-
-$criteria_friend1 = new \Criteria('friend1_uid', $friend1_uid);
-$criteria_friend2 = new \Criteria('friend2_uid', $friend2_uid);
-
-$criteria_delete1 = new \CriteriaCompo($criteria_friend1);
+$friend1_uid      = Request::getInt(
+    'friend_uid',
+    0,
+    'POST'
+);
+$friend2_uid      = (int)$xoopsUser->getVar('uid');
+$criteria_friend1 = new Criteria('friend1_uid', $friend1_uid);
+$criteria_friend2 = new Criteria('friend2_uid', $friend2_uid);
+$criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
-
 $friendshipFactory->deleteAll($criteria_delete1);
-
-$criteria_friend1 = new \Criteria('friend1_uid', $friend2_uid);
-$criteria_friend2 = new \Criteria('friend2_uid', $friend1_uid);
-
-$criteria_delete1 = new \CriteriaCompo($criteria_friend1);
+$criteria_friend1 = new Criteria('friend1_uid', $friend2_uid);
+$criteria_friend2 = new Criteria('friend2_uid', $friend1_uid);
+$criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
-
 $friendshipFactory->deleteAll($criteria_delete1);
-
-redirect_header('friends.php', 3, _MD_YOGURT_FRIENDSHIPTERMINATED);
-
-require dirname(dirname(__DIR__)) . '/footer.php';
+redirect_header('friends.php', 3, _MD_SUICO_FRIENDSHIP_TERMINATED);
+require dirname(__DIR__, 2) . '/footer.php';

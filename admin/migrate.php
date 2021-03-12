@@ -1,34 +1,35 @@
 <?php
+
+declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
- * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico\{
+    Common\Configurator,
+    Common\Migrate
+};
+/** @var Admin $adminObject */
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
 $adminObject->displayNavigation(basename(__FILE__));
-
 echo <<<EOF
 <form method="post" class="form-inline">
 <div class="form-group">
@@ -42,25 +43,17 @@ echo <<<EOF
 </div>
 </form>
 EOF;
-
 //XoopsLoad::load('migrate', 'newbb');
-
-/** @var Yogurt\Common\Configurator $configurator */
-$configurator = new Yogurt\Common\Configurator();
-
-/** @var \XoopsModules\Yogurt\Common\Migrate $migrator */
-$migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
-
-$op        = Request::getCmd('op', 'default');
-$opShow    = Request::getCmd('show', null, 'POST');
-$opMigrate = Request::getCmd('migrate', null, 'POST');
-$opSchema  = Request::getCmd('schema', null, 'POST');
-$op        = !empty($opShow) ? 'show' : $op;
-$op        = !empty($opMigrate) ? 'migrate' : $op;
-$op        = !empty($opSchema) ? 'schema' : $op;
-
-$message = '';
-
+$configurator = new Configurator();
+$migrator     = new Migrate($configurator);
+$op           = Request::getCmd('op', 'default');
+$opShow       = Request::getCmd('show', null, 'POST');
+$opMigrate    = Request::getCmd('migrate', null, 'POST');
+$opSchema     = Request::getCmd('schema', null, 'POST');
+$op           = !empty($opShow) ? 'show' : $op;
+$op           = !empty($opMigrate) ? 'migrate' : $op;
+$op           = !empty($opSchema) ? 'schema' : $op;
+$message      = '';
 switch ($op) {
     case 'show':
         $queue = $migrator->getSynchronizeDDL();
@@ -77,7 +70,12 @@ switch ($op) {
         $message = 'Database migrated to current schema.';
         break;
     case 'schema':
-        xoops_confirm(['op' => 'confirmwrite'], 'migrate.php', 'Warning! This is intended for developers only. Confirm write schema file from current database.', 'Confirm');
+        xoops_confirm(
+            ['op' => 'confirmwrite'],
+            'migrate.php',
+            'Warning! This is intended for developers only. Confirm write schema file from current database.',
+            'Confirm'
+        );
         break;
     case 'confirmwrite':
         if ($GLOBALS['xoopsSecurity']->check()) {
@@ -86,7 +84,5 @@ switch ($op) {
         }
         break;
 }
-
-echo "<div>$message</div>";
-
+echo "<div>${message}</div>";
 require_once __DIR__ . '/admin_footer.php';

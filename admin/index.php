@@ -1,158 +1,161 @@
 <?php
+
+declare(strict_types=1);
 /*
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @category        Module
+ * @package         suico
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt\Common;
+use Xmf\Module\Admin;
+use Xmf\Request;
+use Xmf\Yaml;
+use XoopsModules\Suico\{
+    Common,
+    Helper,
+    Utility
+};
+
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+/** @var Utility $utility */
 
 require __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
-$adminObject = \Xmf\Module\Admin::getInstance();
-
+$adminObject = Admin::getInstance();
 //check or upload folders
 $configurator = new Common\Configurator();
 foreach (array_keys($configurator->uploadFolders) as $i) {
     $utility::createFolder($configurator->uploadFolders[$i]);
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
-
 //-------------------------------------
-
 /*
 //count "total quotes"
 $quotesCount = $quotesHandler->getCount();
 // InfoBox quotes
-$adminObject->addInfoBox(_AM_YOGURT_STATISTICS);
+$adminObject->addInfoBox(_AM_SUICO_STATISTICS);
 // InfoBox quotes
-$adminObject->addInfoBoxLine(sprintf(_AM_YOGURT_THEREARE_QUOTES, $quotesCount));
+$adminObject->addInfoBoxLine(sprintf(_AM_SUICO_THEREARE_QUOTES, $quotesCount));
 */
-
 //count "total Images"
-/** @var \XoopsPersistableObjectHandler $imagesHandler */
-$totalImages = $imagesHandler->getCount();
+/** @var XoopsPersistableObjectHandler $imageHandler */
+$totalImages = $imageHandler->getCount();
 //count "total Friendship"
-/** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $totalFriendship = $friendshipHandler->getCount();
 //count "total Visitors"
-/** @var \XoopsPersistableObjectHandler $visitorsHandler */
 $totalVisitors = $visitorsHandler->getCount();
 //count "total Video"
-/** @var \XoopsPersistableObjectHandler $videoHandler */
 $totalVideo = $videoHandler->getCount();
-//count "total Friendpetition"
-/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
-$totalFriendpetition = $friendpetitionHandler->getCount();
+//count "total Friendrequest"
+$totalFriendrequest = $friendrequestHandler->getCount();
 //count "total Groups"
-/** @var \XoopsPersistableObjectHandler $groupsHandler */
 $totalGroups = $groupsHandler->getCount();
 //count "total Relgroupuser"
-/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
 $totalRelgroupuser = $relgroupuserHandler->getCount();
 //count "total Notes"
-/** @var \XoopsPersistableObjectHandler $notesHandler */
 $totalNotes = $notesHandler->getCount();
 //count "total Configs"
-/** @var \XoopsPersistableObjectHandler $configsHandler */
 $totalConfigs = $configsHandler->getCount();
 //count "total Suspensions"
-/** @var \XoopsPersistableObjectHandler $suspensionsHandler */
 $totalSuspensions = $suspensionsHandler->getCount();
 //count "total Audio"
-/** @var \XoopsPersistableObjectHandler $audioHandler */
 $totalAudio = $audioHandler->getCount();
+//count "total Privacy"
+$totalPrivacy = $privacyHandler->getCount();
 // InfoBox Statistics
-$adminObject->addInfoBox(AM_YOGURT_STATISTICS);
-
+$adminObject->addInfoBox(AM_SUICO_STATISTICS);
 // InfoBox images
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_IMAGES, $totalImages));
 // InfoBox friendship
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
-
-// InfoBox friendpetition
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_FRIENDS, $totalFriendship));
+// InfoBox friendrequest
+$adminObject->addInfoBoxLine(
+    sprintf(AM_SUICO_THEREARE_FRIENDREQUEST, $totalFriendrequest)
+);
 // InfoBox visitors
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_VISITORS, $totalVisitors));
 // InfoBox video
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_VIDEO, $totalVideo));
+// InfoBox friendrequest
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_FRIENDREQUEST, $totalFriendrequest));
 // InfoBox groups
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_GROUPS, $totalGroups));
 // InfoBox relgroupuser
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalRelgroupuser));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_MEMBERS, $totalRelgroupuser));
 // InfoBox notes
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_NOTES, $totalNotes));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_NOTES, $totalNotes));
 // InfoBox configs
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_CONFIGS, $totalConfigs));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_CONFIGS, $totalConfigs));
 // InfoBox suspensions
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_SUSPENSIONS, $totalSuspensions));
-
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_SUSPENSIONS, $totalSuspensions));
 // InfoBox audio
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_AUDIO, $totalAudio));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_AUDIO, $totalAudio));
+// InfoBox privacy
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_PRIVACY, $totalPrivacy));
 // Render Index
 $adminObject->displayNavigation(basename(__FILE__));
-
 //check for latest release
 //$newRelease = $utility->checkVerModule($helper);
 //if (!empty($newRelease)) {
 //    $adminObject->addItemButton($newRelease[0], $newRelease[1], 'download', 'style="color : Red"');
 //}
-
 //------------- Test Data ----------------------------
-
 if ($helper->getConfig('displaySampleButton')) {
     $yamlFile            = dirname(__DIR__) . '/config/admin.yml';
     $config              = loadAdminConfig($yamlFile);
     $displaySampleButton = $config['displaySampleButton'];
-
-    if (1 == $displaySampleButton) {
+    if (1 === $displaySampleButton) {
         xoops_loadLanguage('admin/modulesadmin', 'system');
         require_once dirname(__DIR__) . '/testdata/index.php';
-
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'),
+            '__DIR__ . /../../testdata/index.php?op=load',
+            'add'
+        );
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'),
+            '__DIR__ . /../../testdata/index.php?op=save',
+            'add'
+        );
         //    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS'), '?op=hide_buttons', 'delete');
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS'),
+            '?op=hide_buttons',
+            'delete'
+        );
     } else {
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS'), '?op=show_buttons', 'add');
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS'),
+            '?op=show_buttons',
+            'add'
+        );
         $displaySampleButton = $config['displaySampleButton'];
     }
     $adminObject->displayButton('left', '');
 }
-
 //------------- End Test Data ----------------------------
-
 $adminObject->displayIndex();
-
 /**
  * @param $yamlFile
  * @return array|bool
  */
 function loadAdminConfig($yamlFile)
 {
-    $config = \Xmf\Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
-    return $config;
+    return Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
 }
 
 /**
@@ -161,7 +164,7 @@ function loadAdminConfig($yamlFile)
 function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
@@ -172,12 +175,11 @@ function showButtons($yamlFile)
 {
     $app                        = [];
     $app['displaySampleButton'] = 1;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
-$op = \Xmf\Request::getString('op', 0, 'GET');
-
+$op = Request::getString('op', 0, 'GET');
 switch ($op) {
     case 'hide_buttons':
         hideButtons($yamlFile);
@@ -186,7 +188,5 @@ switch ($op) {
         showButtons($yamlFile);
         break;
 }
-
 echo $utility::getServerStats();
-
 require __DIR__ . '/admin_footer.php';

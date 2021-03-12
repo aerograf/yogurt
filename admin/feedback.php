@@ -1,45 +1,44 @@
 <?php
 
+declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
- * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common;
+use XoopsModules\Suico\{
+    Helper,
+    Utility,
+    Common\ModuleFeedback
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Admin $adminObject */
 
-include __DIR__ . '/admin_header.php';
-
-$adminObject = \Xmf\Module\Admin::getInstance();
-
-$feedback = new \XoopsModules\Yogurt\Common\ModuleFeedback();
-
+require __DIR__ . '/admin_header.php';
+$adminObject = Admin::getInstance();
+$feedback    = new ModuleFeedback();
 // It recovered the value of argument op in URL$
-$op                 = \Xmf\Request::getString('op', 'list');
+$op                 = Request::getString('op', 'list');
 $moduleDirName      = $GLOBALS['xoopsModule']->getVar('dirname');
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('feedback', $moduleDirName);
-
 xoops_cp_header();
-
 switch ($op) {
     case 'list':
     default:
@@ -47,38 +46,30 @@ switch ($op) {
         $feedback->name  = $GLOBALS['xoopsUser']->getVar('name');
         $feedback->email = $GLOBALS['xoopsUser']->getVar('email');
         $feedback->site  = XOOPS_URL;
-        /** @var \XoopsThemeForm $form */
-        $form = $feedback->getFormFeedback();
+        $form            = $feedback->getFormFeedback();
         echo $form->render();
         break;
-
     case 'send':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('feedback.php'));
-
-        $your_name  = \Xmf\Request::getString('your_name', '');
-        $your_site  = \Xmf\Request::getString('your_site', '');
-        $your_mail  = \Xmf\Request::getString('your_mail', '');
-        $fb_type    = \Xmf\Request::getString('fb_type', '');
-        $fb_content = \Xmf\Request::getText('fb_content', '');
-        $fb_content = str_replace(
-            [
-                '
-',
-                '
-',
-                '
-',
-            ],
+        $your_name   = Request::getString('your_name', '');
+        $your_site   = Request::getString('your_site', '');
+        $your_mail   = Request::getString('your_mail', '');
+        $fb_type     = Request::getString('fb_type', '');
+        $fb_content  = Request::getText('fb_content', '');
+        $fb_content  = str_replace(
+            ['', '', '',],
             '<br>',
             $fb_content
         ); //clean line break from dhtmltextarea
-
-        $title       = constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_FOR') . $GLOBALS['xoopsModule']->getVar('dirname');
+        $title       = constant(
+                           'CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_FOR'
+                       ) . $GLOBALS['xoopsModule']->getVar(
+                'dirname'
+            );
         $body        = constant('CO_' . $moduleDirNameUpper . '_' . 'FB_NAME') . ': ' . $your_name . '<br>';
         $body        .= constant('CO_' . $moduleDirNameUpper . '_' . 'FB_MAIL') . ': ' . $your_mail . '<br>';
         $body        .= constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SITE') . ': ' . $your_site . '<br>';
@@ -97,7 +88,6 @@ switch ($op) {
         if ($ret) {
             redirect_header('index.php', 3, constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_SUCCESS'));
         }
-
         // show form with content again
         $feedback->name    = $your_name;
         $feedback->email   = $your_mail;
@@ -109,7 +99,6 @@ switch ($op) {
             </div>';
         $form = $feedback->getFormFeedback();
         echo $form->render();
-
         break;
 }
-include __DIR__ . '/admin_footer.php';
+require __DIR__ . '/admin_footer.php';
